@@ -1,1 +1,1 @@
-Bla bla
+Temporary(?) repo for the course.
