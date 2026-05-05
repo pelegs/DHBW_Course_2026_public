@@ -36,8 +36,8 @@
     1) [ ] scaling
     1) [ ] skew/shear
     1) [ ] rotation
-    1) [ ] reflection by x/y 
-  - [ ] Compositing LTs <==> matrix multiplication
+    1) [ ] reflection by $x$ and $y$
+  - [ ] Compositing LTs $\Leftrightarrow$  matrix multiplication
     1) [ ] That's why MM isn't commutative in general
     1) [ ] Use LTs composition to set up reflection across any line that goes through the origin
   - [ ] The determinant
