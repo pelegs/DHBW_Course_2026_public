@@ -14,7 +14,7 @@
   - [x] Show 2D and 3D cases (desmos)
   - [x] Derive *geometric* form of dot product
   - [x] Go over some properties of the dot product:
-     1) [x] Orthogonality <=> dot product = 0
+     1) [x] Orthogonality $\Leftrightarrow$ dot product = 0
      1) [x] Commutativity
      1) [x] Scalars can be moved around
   - [x] Derive *component* form of dot product
@@ -37,7 +37,7 @@
     1) [ ] skew/shear
     1) [ ] rotation
     1) [ ] reflection by $x$ and $y$
-  - [ ] Compositing LTs $\Leftrightarrow$  matrix multiplication
+  - [ ] Compositing LTs $\Leftrightarrow$ matrix multiplication
     1) [ ] That's why MM isn't commutative in general
     1) [ ] Use LTs composition to set up reflection across any line that goes through the origin
   - [ ] The determinant
