@@ -27,16 +27,16 @@
 ## Linear transformations
   - [x] Introduce as the preservation of LCs/span
   - [x] Show grid form of LTs
-  - [ ] Geometric properties (proof each one?):
-    1) [ ] origin is preserved
-    1) [ ] lines remain lines
-    1) [ ] parallel directions remain parallel
-    1) [ ] areas are scaled uniformly
-  - [ ] From LTs to matrices: show how, and construct some examples:
-    1) [ ] scaling
-    1) [ ] skew/shear
-    1) [ ] rotation
-    1) [ ] reflection by $x$ and $y$
+  - [x] Geometric properties (proof each one?):
+    1) [x] origin is preserved
+    1) [x] lines remain lines
+    1) [x] parallel directions remain parallel
+    1) [x] areas are scaled uniformly
+  - [x] From LTs to matrices: show how, and construct some examples:
+    1) [x] scaling
+    1) [x] skew/shear
+    1) [x] rotation
+    1) [x] reflection by $x$ and $y$
   - [ ] Compositing LTs $\Leftrightarrow$ matrix multiplication
     1) [ ] That's why MM isn't commutative in general
     1) [ ] Use LTs composition to set up reflection across any line that goes through the origin
