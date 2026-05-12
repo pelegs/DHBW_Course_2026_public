@@ -40,8 +40,14 @@
   - [ ] Compositing LTs $\Leftrightarrow$ matrix multiplication
     1) [ ] That's why MM isn't commutative in general
     1) [ ] Use LTs composition to set up reflection across any line that goes through the origin
+  - [ ] LTs $T:\mathbb{R}^{3}\to\mathbb{R}^{3}$
+    1) rotation matrices
+    1) shear, showing how translations in $\mathbb{R}^{2}$ can be represented as shear in $\mathbb{R}^{3}$.
+  - [ ] Homogeneous transformations in 4D for 3D graphics, etc.
+  - [ ] Affine transformations in $\mathbb{R}^{n}$ are just linear transformations in $\mathbb{R}^{(n+1)}$!
   - [ ] The determinant
   - [ ] Eigenvalues and eigenvectors
+  - [ ] Principle Components Analysis
 
 ## Systems of linear equations
   - [ ] TBW
