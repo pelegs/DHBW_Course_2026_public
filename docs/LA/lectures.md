@@ -45,6 +45,8 @@
     1) shear, showing how translations in $\mathbb{R}^{2}$ can be represented as shear in $\mathbb{R}^{3}$.
   - [ ] Homogeneous transformations in 4D for 3D graphics, etc.
   - [ ] Affine transformations in $\mathbb{R}^{n}$ are just linear transformations in $\mathbb{R}^{(n+1)}$!
+  - [ ] Transpose
+  - [ ] Column space, null space, rank
   - [ ] The determinant
   - [ ] Eigenvalues and eigenvectors
   - [ ] Principle Components Analysis
