@@ -14,7 +14,7 @@ xs = np.linspace(xmin, xmax, num_data_pts)
 ys_real = a * xs + b
 
 # Add noise
-noise_std = 7.5
+noise_std = 0.5
 noise = np.random.normal(0, noise_std, size=(num_data_pts))
 ys_noisy = ys_real + noise
 
