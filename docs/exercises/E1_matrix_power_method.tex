@@ -1,0 +1,175 @@
+\documentclass[12pt]{scrartcl}
+\usepackage{fontawesome5}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Graphics & boxes        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{catppuccinpalette}
+\usepackage{tikz}
+\usepackage[breakable]{tcolorbox}
+\tcbuselibrary{theorems, skins}
+
+\tikzset{
+	second box/.style={
+			anchor=east,
+			text=white,
+			% rounded corners,
+			fill=#1,
+			xshift=-4mm,
+		},
+	tcbreak/.style = {fill=white, thick, draw=#1, text=#1, font=\bfseries}
+}
+
+\tcbset{
+	common/.style n args={2}{
+            parbox=false,
+			colframe={#1},
+			colback={#1!5},
+			colbacktitle={#1},
+			lower separated=false,
+			coltitle=white,
+			boxrule=1.25pt,
+			fonttitle=\bfseries,
+			enhanced,
+			breakable,
+			top=10pt,
+			sharp corners,
+			before skip=1em,
+			after skip=2em,
+			attach boxed title to top left={
+					yshift=-0.25cm,
+					xshift=0.38cm,
+				},
+			boxed title style={
+					boxrule=0pt,
+					colframe=white,
+					arc=0pt,
+					outer arc=0pt,
+				},
+			separator sign={~~},
+			% -- overlays based on the following TeX SE answer: https://tex.stackexchange.com/a/545324/162087
+			overlay unbroken={
+					\node[text=white, align=right, fill=#1, xshift=-4mm, minimum height=6mm, anchor=east] at (frame.south east) {#2};
+				},
+			overlay first={
+					\draw[thick, #1, decoration={coil, amplitude=0.5mm}, decorate]
+					(frame.south west) -- (frame.south east);
+					\path[font=\small\itshape] (frame.south) node [tcbreak={#1}] (cont) {continues in the next page \faHandPointRight};
+				},
+			overlay middle={%
+					% upper break
+					\draw[thick, #1, decoration={coil, amplitude=0.5mm}, decorate]
+					(frame.north west) -- (frame.north east);
+					\path[font=\small\itshape] (frame.north) node [tcbreak={#1}] (cont) {\faHandPointRight continues from the previous page};
+
+					% lower break
+					\draw[thick, #1, decoration={coil, amplitude=0.5mm}, decorate]
+					(frame.south west) -- (frame.south east);
+					\path[font=\small\itshape] (frame.south) node [tcbreak={#1}] (cont) {continues in the next page \faHandPointRight};
+				},
+			overlay last={
+					\node[text=white, align=right, fill=#1, xshift=-4mm, minimum height=6mm, anchor=east] at (frame.south east) {#2};
+					\draw[thick, #1, decoration={coil, amplitude=0.5mm}, decorate]
+					(frame.north west) -- (frame.north east);
+					\path[font=\small\itshape] (frame.north) node [tcbreak={#1}] (cont) {\faHandPointRight continues from the previous page};
+				}
+		},
+	examplestyle/.style={
+			common={CtpLatteBlue}{\faStar},
+		},
+}
+
+\newcommand{\newterm}[1]{\textcolor{CtpLatteMauve}{\textbf{#1}}}
+
+% args are {environment name}{Title}{style}{reference prefix}
+\newtcbtheorem[auto counter, number within=section]{example}{Example}{examplestyle}{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Maths related        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath, amsfonts, amssymb}
+\newcommand{\mtrx}[1]{\mathbf{#1}}
+\newcommand{\vvec}[1]{\vec{\mathrm{#1}}}
+\newcommand{\uvec}[1]{\hat{\mathrm{#1}}}
+\newcommand{\T}[1]{#1^{\intercal}}
+
+\colorlet{xcomp}{CtpLatteRed}
+\colorlet{ycomp}{CtpLatteBlue}
+\colorlet{zcomp}{CtpLatteGreen}
+
+% Row- and column-vectors: arguments separated by ";".
+% Example: $\vec{a} = \colvec{1;2;3;4}$.
+\makeatletter
+\newcommand\rcvector[2][\\]{\ensuremath{%
+		\global\def\rc@delim{#1}%
+		\negthinspace\begin{bmatrix}
+			\rc@vector #2;\relax\noexpand\@eolst%
+		\end{bmatrix}}}
+\def\rc@vector #1;#2\@eolst{%
+	\ifx\relax#2\relax
+        #1
+	\else
+        #1\rc@delim
+		\rc@vector #2\@eolst%
+	\fi}
+\makeatother
+\newcommand{\colvecxy}[2]{%
+    \begin{bmatrix}
+        \textcolor{xcomp}{#1}\\
+        \textcolor{ycomp}{#2}
+    \end{bmatrix}
+}
+\newcommand{\rowvec}[1]{\rcvector[\ \;]{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Doc data        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Course Name: Exercise 1}
+\subtitle{Power method for finding dominant eigenvector of a matrix}
+\author{Peleg Bar Sapir}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Document here        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\subsection{Extracting the eigenvalue of a known eigenvector}
+Let $\vvec{v}\in\mathbf{R}^{n}$ be an eigenvector of the matrix $\mtrx{A}$ with the corresponding eigenvalue $\lambda$. Then by normalizing $\vvec{v}$ and multiplying it with $\mtrx{A}$ from both the right and the left, we can extract $\lambda$:
+\begin{equation}
+    \begin{aligned}
+        \T{\uvec{v}}\mtrx{A}\uvec{v} &= \T{\uvec{v}}\lambda\uvec{v}\\
+                                     &= \lambda\T{\uvec{v}}\uvec{v}\\
+                                     &= \lambda\left\|\uvec{v}\right\|^{2}\\
+                                     &= \lambda\cdot1\\
+                                     &= \lambda.
+    \end{aligned}
+    \label{eq:}
+\end{equation}
+
+\subsection{The power method}
+The \textit{dominant eigenvalue} $\lambda_{\mathrm{dom}}$ of a matrix $\mtrx{A}$ of dimensions $n\times n$ is the eigenvalue with largest (absolute) value:
+\begin{equation}
+    \lambda_{\mathrm{dom}} = \max\left|\lambda_{i}\right|,
+    \label{eq:}
+\end{equation}
+where $\left\{\lambda_{i}\right\}$ are the eigenvalues of $\mtrx{A}$.
+
+One can find the dominant eigenvector of $\mtrx{A}$ by using the \textit{power method}:
+\begin{enumerate}
+    \item let $\vvec{v}_{0}\in\mathbb{R}^{n}$ be a \textbf{non-zero} vector with random components.
+    \item Set $\lambda_{0}=1$ (note: the subscript denotes an iteration step, not the order of the eigenvalue).
+    \item Apply the $\mtrx{A}$ to $\vvec{v}_{0}$: $\vvec{v}_{1}=\mtrx{A}\vvec{v}_{0}$.
+    \item Extract $\lambda_{1}$ by multiplying $\mtrx{A}$ from the left by $\T{\vvec{v}_{1}}$ and from the right by $\vvec{v}_{1}$ (\autoref{eq:eigenval_from_vec}). %, i.e. $\lambda_{1} = \T{\vvec{v}_{1}}\mtrx{A}\vvec{v}_{1}$.
+\end{enumerate}
+\end{document}
