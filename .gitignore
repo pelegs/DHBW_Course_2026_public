@@ -1,1 +1,3 @@
 code/linear_regression/manual_calcs.py
+*.aux
+docs/**/*.log
