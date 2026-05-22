@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1779465801.37765 "code/E1_matrix_power_method.tex" "pdfs/E1_matrix_power_method.pdf" "pdfs/E1_matrix_power_method" 1779465803.73855 0
+["pdflatex"] 1779466108.02849 "code/E1_matrix_power_method.tex" "pdfs/E1_matrix_power_method.pdf" "pdfs/E1_matrix_power_method" 1779466109.95916 0
   "/home/psapir/.texlive/texmf-var/luatex-cache/generic/fonts/otl/fontawesome5brands-regular-400.luc" 1775567414.48859 180102 f7147e17e8de42719f8456d2132a6f53 ""
   "/home/psapir/.texlive/texmf-var/luatex-cache/generic/fonts/otl/fontawesome5free-solid-900.luc" 1775567414.40659 380927 d6fe6e53c3a00de94cfec2728177f905 ""
   "/home/psapir/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmmono12-regular.luc" 1779465057.91416 81759 1de4caea3190d58a8ed7a1c286881f01 ""
@@ -264,8 +264,8 @@
   "_minted/DF65E960729CD9E751B0CCB627E2B74E.highlight.minted" 1779465436.90564 69 d8c3bb568dd45d60ba05a7f9fcfdacad ""
   "_minted/E6EC1964493C9280A54295F98FF8DB05.highlight.minted" 1779465378.3762 76 de3d122b67f9d4db446d1589f789a576 ""
   "_minted/borland.style.minted" 1779465586.24597 5130 7120de3a05a19fe2bb5fe73a2ba982eb ""
-  "code/E1_matrix_power_method.tex" 1779465668.99849 7567 625d4e1f97a07de5942ee1bf8b00a01c ""
-  "pdfs/E1_matrix_power_method.aux" 1779465803.59688 2671 c1058e10b907f30067790b1b9ac11473 "pdflatex"
+  "code/E1_matrix_power_method.tex" 1779466091.79073 7603 78cc3645390b59cc547f636ad8e26a5a ""
+  "pdfs/E1_matrix_power_method.aux" 1779466109.85632 2671 c1058e10b907f30067790b1b9ac11473 "pdflatex"
   (generated)
   "pdfs/E1_matrix_power_method.aux"
   "pdfs/E1_matrix_power_method.log"
