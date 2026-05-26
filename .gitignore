@@ -6,3 +6,4 @@ code/linear_regression/manual_calcs.py
 *.fls
 docs/**/*.log
 _minted/
+code/SVD/pics/*.png
