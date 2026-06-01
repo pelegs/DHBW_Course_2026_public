@@ -18,14 +18,16 @@ img_matrix = np.array(img_file)
 num_rows, num_cols = img_matrix.shape[:2]
 reduced_matrix = np.zeros((num_rows, num_cols, 3))
 
-
 # SVD
 for color in [R, G, B]:
     U, S, Vh = np.linalg.svd(img_matrix[:, :, color])
     reduced_matrix[:, :, color] = U[:, :K] @ np.diag(S[:K]) @ Vh[:K]
 
 # Show image
-plt.imshow(reduced_matrix.astype(np.uint8), interpolation="nearest")
-plt.show()
+# plt.imshow(reduced_matrix.astype(np.uint8), interpolation="nearest")
+# plt.show()
+
+print(f"Original size: {img_matrix.nbytes}")
+print(f"Reduced size: {reduced_matrix.astype(np.uint8).nbytes}")
 
 # TODO: add argparse, optional save/view file, etc.

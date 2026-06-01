@@ -1,0 +1,9 @@
+# Fdb version 4
+["pdflatex"] 0 "src/E1_matrix_power_method.tex" "pdfs/pdfs/E1_matrix_power_method.tex.pdf" "pdfs/E1_matrix_power_method.tex" 0 -1
+  "auxdir/pdfs/E1_matrix_power_method.tex.aux" 0 -1 0 "pdflatex"
+  "src/E1_matrix_power_method.tex" 0 -1 0 ""
+  (generated)
+  "auxdir/pdfs/E1_matrix_power_method.tex.aux"
+  "auxdir/pdfs/E1_matrix_power_method.tex.log"
+  "pdfs/pdfs/E1_matrix_power_method.tex.pdf"
+  (rewritten before read)
