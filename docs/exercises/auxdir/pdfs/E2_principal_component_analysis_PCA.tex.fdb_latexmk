@@ -1,9 +1,0 @@
-# Fdb version 4
-["pdflatex"] 0 "src/E2_principal_component_analysis_PCA.tex" "pdfs/pdfs/E2_principal_component_analysis_PCA.tex.pdf" "pdfs/E2_principal_component_analysis_PCA.tex" 0 -1
-  "auxdir/pdfs/E2_principal_component_analysis_PCA.tex.aux" 0 -1 0 "pdflatex"
-  "src/E2_principal_component_analysis_PCA.tex" 0 -1 0 ""
-  (generated)
-  "auxdir/pdfs/E2_principal_component_analysis_PCA.tex.aux"
-  "auxdir/pdfs/E2_principal_component_analysis_PCA.tex.log"
-  "pdfs/pdfs/E2_principal_component_analysis_PCA.tex.pdf"
-  (rewritten before read)
