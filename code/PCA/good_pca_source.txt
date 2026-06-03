@@ -1,0 +1,4 @@
+- https://www.geo.fu-berlin.de/en/v/soga-py/Advanced-statistics/Multivariate-Approaches/Principal-Component-Analysis/PCA-Example/Data-preparation/index.html
+- Nice gif for visualization: https://i.sstatic.net/Q7HIP.gif
+- gif taken from here: https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues/140579#140579
+- More (and biplots!): https://stats.stackexchange.com/questions/141754/pca-and-correspondence-analysis-in-their-relation-to-biplot
