@@ -2,19 +2,6 @@
 \usepackage{fontawesome5}
 \usepackage{siunitx}
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-%        Minted        %
-%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{minted}
-\setminted[python]{
-    linenos,
-}
-\usemintedstyle{borland}
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{1em}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Graphics & boxes        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -100,6 +87,22 @@
 
 % args are {environment name}{Title}{style}{reference prefix}
 \newtcbtheorem[auto counter, number within=section]{example}{Example}{examplestyle}{example}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%        Minted        %
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{minted}
+\setminted[python]{
+    bgcolor=CtpLatteBase,
+    % frame=lines,
+    linenos,
+}
+% \usemintedstyle{}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Maths related        %
@@ -155,8 +158,39 @@
 \begin{document}
 \maketitle
 
+Principal Component Analysis (PCA) is an application of Singular Value Decomposition (SVD) \dots
+
+The data set is \dots
+
 \begin{enumerate}
-    \item Load the data into a single NumPy array, using \mintinline{python}{numpy.load(filename)}.
+    \item Load the data into a single NumPy array, using \mintinline{python}{numpy.loadtxt()}. Mathematically, we will call this $\mtrx{X}$. Note that the rows of $\mtrx{X}$ are the separate \textit{samples} (measurements), while its columns are the variables: \textit{sepal length}, \textit{sepal width}, \textit{petal length} and \textit{petal width}.
+    \item Center the data by dividing each column of $\mtrx{x}$ by its mean:
+        \[
+            \mtrx{Y} = \mtrx{X} - \mtrx{\overline{X}}.
+        \]
+    \item Normalize each column of $\mtrx{Y}$ by dividing it by its standard deviation $\sigma$:
+        \[
+            \mtrx{B} = \frac{1}{\sigma}\mtrx{Y}.
+        \]
+    \item Apply the SVD method on the matrix $\mtrx{B}$:
+        \begin{minted}{python}
+U, S, VT = numpy.linalg.SVD(B, full_matrices=False)
+        \end{minted}
+        (where \mintinline{python}{U, S, VT} are, respectively, the matrices $\mtrx{U},\ \mtrx{\Sigma},\ $ and $\T{\mtrx{V}}$ in the SVD of $\mtrx{B}$)
+    \item In the terms of PCA, the columns of $\mtrx{U}$ are called the \textit{Principal Components} (PC) of $\mtrx{B}$. Their corresponding singular values are the diagonal elements of $\mtrx{\Sigma}$, and they are ordered by absolute value in descending order. The variance in $\mathrm{PC}_{i}$ is given by
+        \[
+            \mathrm{Var}_{i} = \frac{\sigma_{i}^{2}}{N-1},
+        \]
+    where $N$ is the number of samples. Plot the variance for each PC in descending order.
+    \item If we normalize the variance by the sum of all variance terms, we get the variance in each PC in terms of the percentage of total variance of the data. Calculate these percentages and adjust the previous plot accordingly.
+    \item The cumulative sum of the normalized variances up to (and including) the $i$-th PC gives us an representation of how much of the variance in the data is described by the first $i$ PCs. Plot the cumulative sums against the components (i.e. cumulative sum vs. $i$). Does this value converge to a limit? If so - how can you explain this limit?
+    \item \dots
+% components = np.arange(1, num_components + 1)
+% variance = S**2 / num_samples
+% variance /= np.sum(variance)
+% csum = np.cumsum(variance)
 \end{enumerate}
+%hints:
+%The singular values of $\sigma_{i}$ (the diagonal elements of $\mtrx{\Sigma}$) are ordered by decreasing absolute value. The coressponding left and right singular values are the columns of $\mtrx{U}$ and rows of $\T{\mtrx{V}}$, respectively.
 
 \end{document}
