@@ -99,6 +99,7 @@
     linenos,
 }
 % \usemintedstyle{}
+\newcommand{\pyinl}[1]{\mintinline{python}{#1}}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1em}
@@ -166,13 +167,13 @@ Principal Component Analysis (PCA) is an application of Singular Value Decomposi
 The data set is \dots
 
 \begin{enumerate}
-	\item Load the data into a single NumPy array, using \mintinline{python}{numpy.loadtxt()}. Mathematically, we will call this data array $\mtrx{X}$. Note that the \textbf{rows} of $\mtrx{X}$ are the separate \textit{samples} (measurements), while its \textbf{columns} are the variables (features): \textit{sepal length}, \textit{sepal width}, \textit{petal length} and \textit{petal width}.
-	\item Center and normalize the data by subtracting from each \textbf{column} of $\mtrx{x}$ its mean, then dividing it by its standard deviation. Use the functions \mintinline{python}{numpy.mean()} and \mintinline{python}{numpy.std()}, respectively. Which axis should you use for these operations? Call the resulting matrix $\mtrx{B}$.
+	\item Load the data into a single NumPy array, using \pyinl{numpy.loadtxt()}. Mathematically, we will call this data array $\mtrx{X}$. Note that the \textbf{rows} of $\mtrx{X}$ are the separate \textit{samples} (measurements), while its \textbf{columns} are the variables (features): \textit{sepal length}, \textit{sepal width}, \textit{petal length} and \textit{petal width}.
+	\item Center and normalize the data by subtracting from each \textbf{column} of $\mtrx{x}$ its mean, then dividing it by its standard deviation. Use the functions \pyinl{numpy.mean()} and \pyinl{numpy.std()}, respectively. Which axis should you use for these operations? Call the resulting matrix $\mtrx{B}$.
 	\item Apply the SVD method to the matrix $\mtrx{B}$:
 	      \begin{minted}{python}
 U, S, VT = numpy.linalg.SVD(B, full_matrices=False)
     \end{minted}
-	      (where \mintinline{python}{U, S, VT} are, respectively, the matrices $\mtrx{U},\ \mtrx{\Sigma},\ $ and $\T{\mtrx{V}}$ in the SVD of $\mtrx{B}$)
+	      (where \pyinl{U, S, VT} are, respectively, the matrices $\mtrx{U},\ \mtrx{\Sigma},\ $ and $\T{\mtrx{V}}$ in the SVD of $\mtrx{B}$)
 	\item In the terms of PCA, the columns of $\mtrx{U}$ are called the \textit{Principal Components} (PC) of $\mtrx{B}$. The number of principal components $N$ is the number of variables in the data:
 	      \[
 		      \PC{1},\ \PC{2},\ \dots,\ \PC{N}.
@@ -191,14 +192,15 @@ U, S, VT = numpy.linalg.SVD(B, full_matrices=False)
 
 	      Plot the variance for each PC in descending order.
 	\item What do we get if we divide each $\var{i}$ by the sum of all variance terms? Plot these values as function of $i$. (\textbf{hint}: what is the sum of these terms?)
-	\item Plot the \textit{cumulative sum} of the values calculated in the previous step, again against $i$ (use the function \mintinline{python}{numpy.cumsum()}). Does the cumulative sum seem to converge, and if so - to what limit? Explain briefly.
-	\item \dots
-	      % components = np.arange(1, num_components + 1)
-	      % variance = S**2 / num_samples
-	      % variance /= np.sum(variance)
-	      % csum = np.cumsum(variance)
+	\item Plot the \textit{cumulative sum} of the values calculated in the previous step, again against $i$ (use the function \pyinl{numpy.cumsum()}). Does the cumulative sum seem to converge, and if so - to what limit? Explain briefly.
+	\item Since the PCs are prdered by their variance in descending order, we can choose the first two PCs, $\PC{1}$ and $\PC{2}$, and project the data on to them. This will keep the most variance in the data while allowing us to visualize it. The matrix $\mtrx{U}$ has the PCs as its columns, and $\mtrx{\Sigma}$ are their respective values - both are sorted by variance in descending order. Therefore, the full data in terms of the PCs is given by
+	      \[
+		      \mtrx{P} = \mtrx{U} \cdot \mtrx{\Sigma},
+	      \]
+	      and therefore, the projection of the data on the first $k$ PCs is given by the matrix product of the frst $k$ rows of $\mtrx{U}$ and the first $k$ rows of the matrix $\mtrx{\Sigma}$:
+	      \[
+		      \mtrx{P}_{j=1}^{k} = \mtrx{U}_{j=1}^{k} \cdot \mtrx{\Sigma}_{j=1}^{k}.
+	      \]
+	      Implement this last projection on the first two PCs (i.e. $k=2$), and plot the result as a scatter plot of $\PC{2}$ vs. $\PC{1}$. Use \pyinl{axes.scatter(x, y)}, where \pyinl{x} and \pyinl{y} are the components of the data points in the $\PC{1}$ and $\PC{2}$ basis verctors, respectively.
 \end{enumerate}
-%hints:
-%The singular values of $\sigma_{i}$ (the diagonal elements of $\mtrx{\Sigma}$) are ordered by decreasing absolute value. The coressponding left and right singular values are the columns of $\mtrx{U}$ and rows of $\T{\mtrx{V}}$, respectively.
-
 \end{document}
