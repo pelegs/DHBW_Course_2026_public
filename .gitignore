@@ -7,4 +7,3 @@ code/linear_regression/manual_calcs.py
 docs/**/*.log
 _minted/
 code/SVD/pics/*.png
-*.csv
