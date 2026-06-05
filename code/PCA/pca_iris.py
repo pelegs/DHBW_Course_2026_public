@@ -30,6 +30,7 @@ ax[0].set_title("Singular values", size=25)
 ax[0].set_xlabel("Component", size=20)
 ax[0].set_ylabel("Statistical significance (variance)", size=20)
 ax[0].set_xticks(components)
+ax[0].tick_params(axis="both", which="major", labelsize=15)
 bars = ax[0].bar(components, variance)
 ax[0].bar_label(
     bars, labels=[f"{var:0.2f}" for var in variance], color="black", fontsize=14
@@ -39,6 +40,7 @@ ax[1].set_title("Cumulative statistical value", size=25)
 ax[1].set_xlabel("Component", size=20)
 ax[1].set_ylabel("Cumulative value", size=20)
 ax[1].set_xticks(components)
+ax[1].tick_params(axis="both", which="major", labelsize=15)
 ax[1].plot(components, csum, "-", color="orange")
 ax[1].plot(components, csum, ".", color="red")
 for i, v in enumerate(csum, start=1):
@@ -62,9 +64,10 @@ norm = BoundaryNorm(bounds, cmap.N)
 
 # Second plot (scatter + biplot)
 fig, ax = plt.subplots()
-ax.set_title("PCA, Iris data")
-ax.set_xlabel("PC1")
-ax.set_ylabel("PC2")
+ax.set_title("PCA, Iris data", size=25)
+ax.set_xlabel("PC1", size=20)
+ax.set_ylabel("PC2", size=20)
+ax.tick_params(axis="both", which="major", labelsize=15)
 scatter = ax.scatter(
     projections[:, 0], projections[:, 1], c=species, cmap=cmap, norm=norm
 )

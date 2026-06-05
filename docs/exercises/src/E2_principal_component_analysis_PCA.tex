@@ -162,12 +162,14 @@
 \begin{document}
 \maketitle
 
-Principal Component Analysis (PCA) is an application of Singular Value Decomposition (SVD) \dots
+Principal Component Analysis (PCA) is an application of Singular Value Decomposition (SVD) to a data set, which allows us to visualize the data by \textit{dimensionality reduction}: instead of looking at a high-dimensional data (sometimes in excess of several \textit{hundreds} dimensions!), which may have numerous correlations - we can look at projections of said data on the first few directions in which its variance is the largest.
 
-The data set is \dots
+In standard PCA, the data set is represented as a matrix, with its \textbf{rows} being the separate \textit{samples} (measurements), and its \textbf{columns} the different \textit{variables} (features).
+
+The following steps describe how to implement PCA in Python using NumPy's \pyinl{SVD()} function, and visualize the resulting data representation using MatPlotLib's \pyinl{axes.bars()}, \pyinl{axes.plot()} and \pyinl{axes.scatter()} functions.
 
 \begin{enumerate}
-	\item Load the data into a single NumPy array, using \pyinl{numpy.loadtxt()}. Mathematically, we will call this data array $\mtrx{X}$. Note that the \textbf{rows} of $\mtrx{X}$ are the separate \textit{samples} (measurements), while its \textbf{columns} are the variables (features): \textit{sepal length}, \textit{sepal width}, \textit{petal length} and \textit{petal width}.
+	\item Load the data into a single NumPy array, using \pyinl{numpy.loadtxt()}. Mathematically, we will call this data array $\mtrx{X}$. \textit{sepal length}, \textit{sepal width}, \textit{petal length} and \textit{petal width}.
 	\item Center and normalize the data by subtracting from each \textbf{column} of $\mtrx{x}$ its mean, then dividing it by its standard deviation. Use the functions \pyinl{numpy.mean()} and \pyinl{numpy.std()}, respectively. Which axis should you use for these operations? Call the resulting matrix $\mtrx{B}$.
 	\item Apply the SVD method to the matrix $\mtrx{B}$:
 	      \begin{minted}{python}
@@ -194,13 +196,41 @@ U, S, VT = numpy.linalg.SVD(B, full_matrices=False)
 	\item What do we get if we divide each $\var{i}$ by the sum of all variance terms? Plot these values as function of $i$. (\textbf{hint}: what is the sum of these terms?)
 	\item Plot the \textit{cumulative sum} of the values calculated in the previous step, again against $i$ (use the function \pyinl{numpy.cumsum()}). Does the cumulative sum seem to converge, and if so - to what limit? Explain briefly.
 	\item Since the PCs are prdered by their variance in descending order, we can choose the first two PCs, $\PC{1}$ and $\PC{2}$, and project the data on to them. This will keep the most variance in the data while allowing us to visualize it. The matrix $\mtrx{U}$ has the PCs as its columns, and $\mtrx{\Sigma}$ are their respective values - both are sorted by variance in descending order. Therefore, the full data in terms of the PCs is given by
-	      \[
-		      \mtrx{P} = \mtrx{U} \cdot \mtrx{\Sigma},
-	      \]
-	      and therefore, the projection of the data on the first $k$ PCs is given by the matrix product of the frst $k$ rows of $\mtrx{U}$ and the first $k$ rows of the matrix $\mtrx{\Sigma}$:
-	      \[
-		      \mtrx{P}_{j=1}^{k} = \mtrx{U}_{j=1}^{k} \cdot \mtrx{\Sigma}_{j=1}^{k}.
-	      \]
-	      Implement this last projection on the first two PCs (i.e. $k=2$), and plot the result as a scatter plot of $\PC{2}$ vs. $\PC{1}$. Use \pyinl{axes.scatter(x, y)}, where \pyinl{x} and \pyinl{y} are the components of the data points in the $\PC{1}$ and $\PC{2}$ basis verctors, respectively.
+    \begin{equation}
+        \mtrx{P} = \mtrx{U} \cdot \mtrx{\Sigma}.
+        \label{eq:principal_components_US}
+    \end{equation}
+    The projection of the data on the first $k$ PCs is then given by the matrix product of the frst $k$ rows of $\mtrx{U}$ and the first $k$ rows of the matrix $\mtrx{\Sigma}$:
+    \begin{equation}
+        \mtrx{P}_{j=1}^{k} = \mtrx{U}_{j=1}^{k} \cdot \mtrx{\Sigma}_{j=1}^{k}.
+        \label{eq:principal_components_first_k_dims}
+    \end{equation}
+    Implement this last projection (\autoref{eq:principal_components_first_k_dims}) on the first two PCs (i.e. $k=2$), and plot the result as a scatter plot of $\PC{2}$ vs. $\PC{1}$. Use \pyinl{axes.scatter(x, y)}, where \pyinl{x} and \pyinl{y} are the components of the data points in the $\PC{1}$ and $\PC{2}$ basis verctors, respectively.
+    \item You can color the data using the last column, which separates the samples according to the plant's type: Setosa, Versicolor and Virginica. These are represented in the data set as \pyinl{0}, \pyinl{1} and \pyinl{2}, respectively. To use these columns as the color in the scatter plot from the previous step, use the following steps:
+        \begin{enumerate}
+            \item Import the following two functions from MatPlotLib's \pyinl{colors} module:
+            \begin{minted}{python}
+from matplotlib.colors import ListedColormap, BoundaryNorm
+            \end{minted}
+
+        \item After loading the data into a matrix, save the last column as the plant's type (make sure this array contains only the values \pyinl{0}, \pyinl{1} and \pyinl{2}).
+            \begin{minted}{python}
+species = data[:, -1]
+            \end{minted}
+
+        \item Generate a color map where \pyinl{0} is mapped to \pyinl{red}, \pyinl{1} to \pyinl{green} and \pyinl{2} to \pyinl{blue} (or whatever other three colors you want):
+            \begin{minted}{python}
+colors = ["red", "green", "blue"]
+cmap = ListedColormap(colors)
+bounds = [-0.1, 0.9, 1.9, 2.9]
+norm = BoundaryNorm(bounds, cmap.N)
+            \end{minted}
+
+        \item Apply the color map to your scatter plot (note that the first two arguments are hidden since they relate to the task in th previous step):
+            \begin{minted}{python}
+ax.scatter(..., ..., c=species, cmap=cmap, norm=norm)
+            \end{minted}
+    \end{enumerate}
+
 \end{enumerate}
 \end{document}
